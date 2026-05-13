@@ -1,6 +1,6 @@
-# 🗑️ Aufgabenlöscher
+# TaskFlow — Fullstack Aufgabenmanager
 
-Eine professionelle Fullstack-Webanwendung zur Verwaltung von Aufgaben mit CRUD-Funktionalität.
+Eine professionelle Fullstack-Webanwendung zur Verwaltung von Aufgaben mit CRUD-Funktionalität. Entwickelt als IHK-Abschlussprojekt mit moderner 3-Schichten-Architektur, AWS-Deployment und automatischem CI/CD.
 
 ## Projektübersicht
 
@@ -18,6 +18,9 @@ Dieses Projekt wurde im Rahmen eines IT-Administrator-/IHK-Projekts entwickelt u
 - 🗑️ Aufgaben löschen
 - 💾 Datenpersistenz über SQLite
 - 🔄 REST API Kommunikation über JSON
+- ☁️ AWS EC2 Deployment mit Nginx und SSL
+- 📊 Monitoring-Statusseite
+- 🚀 Automatisches Deploy-Skript
 
 ## Projektstruktur
 
@@ -105,7 +108,20 @@ Das Projekt wurde mit professionellem Branching entwickelt:
 - **Frontend:** React 19, Vite 6, CSS3
 - **Backend:** FastAPI, SQLAlchemy, Pydantic, Uvicorn
 - **Datenbank:** SQLite
-- **Tools:** Git, GitHub, REST API
+- **Deployment:** AWS EC2, Nginx, SSL/HTTPS, Systemd
+- **Tools:** Git, GitHub, REST API, SSH
+
+## AWS Deployment
+
+Das Projekt ist erfolgreich auf AWS EC2 deployed:
+
+- **Server:** Ubuntu 22.04 LTS auf AWS EC2 (t2.micro)
+- **Webserver:** Nginx mit Reverse Proxy
+- **SSL:** Selbst-signiertes Zertifikat für HTTPS
+- **Monitoring:** Automatische Status-Seite (`/status.html`)
+- **Auto-Deploy:** Ein-Klick Deployment-Skript
+
+Siehe `dokumentation/AWS-DEPLOYMENT.md` für die vollständige Anleitung.
 
 ## Autor
 
