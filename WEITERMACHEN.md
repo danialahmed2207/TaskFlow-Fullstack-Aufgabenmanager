@@ -1,39 +1,71 @@
-# 🗑️ Aufgabenlöscher — Projekt-Erinnerung / Stand vom 13.05.2026
+# 🗑️ Aufgabenlöscher — Projekt-Erinnerung / Aktueller Stand
 
 > Diese Datei dient als Tagesprotokoll und Einstiegspunkt für die nächste Sitzung.
-> Erstellt am: 13. Mai 2026 um ~01:45 Uhr
+> Zuletzt aktualisiert: 13. Mai 2026
 
 ---
 
-## ✅ Was wurde bisher erledigt?
+## ✅ WAS WURDE BISHER ERLEDIGT?
 
-### Projekt-Setup
+### Lokales Projekt (Entwicklung)
 - [x] Ordnerstruktur `backend/` und `frontend/` erstellt
 - [x] Git initialisiert und professionelle `.gitignore` + `.gitattributes` angelegt
-- [x] GitHub-Repository erstellt und verbunden: `danialahmed2207/aufgabenloescher`
+- [x] GitHub-Repository verbunden: `danialahmed2207/aufgabenloescher`
 - [x] Feature-Branches verwendet (`backend-setup`, `frontend-setup`) und in `main` gemergt
-- [x] **19 professionelle Commits** über 5 Projekttage verteilt (09.05. – 13.05.)
+- [x] **23 professionelle Commits** über 5 Projekttage verteilt (09.05. – 13.05.)
 
 ### Backend (FastAPI + SQLite)
 - [x] `requirements.txt` mit FastAPI, Uvicorn, SQLAlchemy, Pydantic
 - [x] `database.py` — SQLite-Engine, SessionLocal, `get_db()` Dependency
-- [x] `models.py` — SQLAlchemy `Task` Modell (id, title, description, completed)
+- [x] `models.py` — SQLAlchemy `Task` Modell
 - [x] `schemas.py` — Pydantic Schemas (TaskBase, TaskCreate, TaskUpdate, Task)
-- [x] `crud.py` — Alle CRUD Operationen (Create, Read, Update, Delete)
+- [x] `crud.py` — Alle CRUD Operationen
 - [x] `main.py` — FastAPI App mit 5 REST Endpunkten + CORS + Swagger Docs
 - [x] `test_api.http` — Testdatei für Thunder Client / REST Client
-- [x] `.env.example` — Konfigurationsvorlage für das Backend
+- [x] `.env.example` — Konfigurationsvorlage
 
 ### Frontend (React + Vite)
 - [x] Vite-Projekt mit React-Template initialisiert
 - [x] `App.jsx` — Hauptkomponente mit vollständiger CRUD-Logik
 - [x] `App.css` — Responsives Styling mit CSS-Variablen + Mobile-Optimierung
 - [x] `src/components/TaskItem.jsx` — Ausgelagerte Einzel-Task-Komponente
-- [x] `.env.example` — Konfigurationsvorlage für Frontend (VITE_API_URL)
+- [x] `.env.example` — Konfigurationsvorlage
 
 ### Dokumentation
 - [x] `README.md` — Vollständige Setup-Anleitung + API-Dokumentation
 - [x] `PROJEKTPLAN.md` — Pflichtenheft mit abgehaktem Status
+- [x] `dokumentation/TAG-02-PROTOKOLL.md` — Tagesprotokoll Tag 2 (10.05.)
+- [x] `dokumentation/TAG-05-PROTOKOLL.md` — Tagesprotokoll Tag 5 (13.05.)
+- [x] `dokumentation/TAG-05-AWS-DEPLOYMENT.md` — AWS Deployment Protokoll
+- [x] `dokumentation/AWS-DEPLOYMENT.md` — AWS Deployment Anleitung
+
+---
+
+## ☁️ AWS DEPLOYMENT (ERLEDIGT AM 13.05.)
+
+### AWS-Ressourcen
+
+| Ressource | ID / Name |
+|-----------|-----------|
+| **VPC** | `vpc-08771a5f5401d5547` |
+| **EC2 Instance** | `i-08a82ffebd6802307` |
+| **Security Group** | `sg-05c21ee1d31d3f105` |
+| **SSH Key Pair** | `aufgabenloescher-key` |
+| **AWS Account** | `579320645741` (Techstarter Sandbox) |
+
+### Server-Konfiguration
+- **OS:** Ubuntu 22.04 LTS
+- **Webserver:** Nginx (Ports 80 + 443)
+- **Backend:** FastAPI + Uvicorn (Port 8000, intern)
+- **Datenbank:** SQLite (`tasks.db`)
+- **SSL:** Selbst-signiertes Zertifikat (für Demo)
+- **Monitoring:** Cronjob alle 5 Minuten (`/status.html`)
+- **Auto-Deploy:** Skript unter `/usr/local/bin/deploy-aufgabenloescher`
+
+### Wichtige Hinweise
+- ⚠️ Die EC2-Instanz ist aktuell **GESTOPPT** (keine laufenden Kosten)
+- ⚠️ Die öffentliche IP ändert sich bei jedem Neustart!
+- 💡 Für feste IP: Elastic IP erstellen und zuweisen
 
 ---
 
@@ -41,20 +73,20 @@
 
 | Datei | Ordner | Zweck |
 |-------|--------|-------|
-| `main.py` | `backend/` | Einstiegspunkt — startet API auf Port 8000 |
-| `database.py` | `backend/` | Stellt DB-Verbindung bereit |
-| `crud.py` | `backend/` | Enthält alle Datenbankoperationen |
-| `models.py` | `backend/` | Definiert die SQLite-Tabellenstruktur |
-| `schemas.py` | `backend/` | Validierung für API-Requests/Responses |
-| `App.jsx` | `frontend/src/` | Haupt-React-Komponente mit Fetch-API |
-| `App.css` | `frontend/src/` | Komplettes Styling der Anwendung |
-| `TaskItem.jsx` | `frontend/src/components/` | Einzelne Aufgabe als wiederverwendbare Komponente |
-| `index.html` | `frontend/` | HTML-Grundgerüst |
-| `package.json` | `frontend/` | NPM-Abhängigkeiten und Scripts |
+| `main.py` | `backend/` | FastAPI Einstiegspunkt |
+| `database.py` | `backend/` | SQLite Verbindung |
+| `crud.py` | `backend/` | Datenbankoperationen |
+| `models.py` | `backend/` | Tabellenstruktur |
+| `schemas.py` | `backend/` | API-Validierung |
+| `server.py` | `backend/` | Flask Demo-Backend (Python 3.14 Fallback) |
+| `s3-policy.json` | `backend/` | S3 Bucket Policy Template |
+| `App.jsx` | `frontend/src/` | Haupt-React-Komponente |
+| `App.css` | `frontend/src/` | Styling |
+| `TaskItem.jsx` | `frontend/src/components/` | Einzelne Aufgabe |
 
 ---
 
-## 🚀 So startet man das Projekt (Schritt-für-Schritt)
+## 🚀 SO STARTEST DU DAS PROJEKT (LOKAL)
 
 ### Terminal 1 — Backend
 ```bash
@@ -76,6 +108,38 @@ npm run dev
 
 ---
 
+## ☁️ SO STARTEST DU DIE AWS-INSTANZ WIEDER
+
+### 1. Instanz starten
+```bash
+aws ec2 start-instances --instance-ids i-08a82ffebd6802307 --profile Danial --region eu-central-1
+```
+
+### 2. Neue öffentliche IP abrufen
+```bash
+aws ec2 describe-instances \
+  --instance-ids i-08a82ffebd6802307 \
+  --query 'Reservations[0].Instances[0].PublicIpAddress' \
+  --output text \
+  --profile Danial \
+  --region eu-central-1
+```
+
+### 3. Services prüfen (nach dem Start)
+```bash
+ssh -i /tmp/aufgabenloescher-key.pem ubuntu@NEUE-IP
+sudo systemctl status aufgabenloescher   # Backend
+sudo systemctl status nginx               # Webserver
+sudo /usr/local/bin/update-monitor        # Monitoring aktualisieren
+```
+
+### 4. Deploy-Skript ausführen (bei Code-Änderungen)
+```bash
+ssh -i /tmp/aufgabenloescher-key.pem ubuntu@NEUE-IP 'deploy-aufgabenloescher'
+```
+
+---
+
 ## 🔗 GitHub-Verbindung
 
 - **Repository:** https://github.com/danialahmed2207/aufgabenloescher
@@ -83,7 +147,7 @@ npm run dev
 - **Branch:** `main` (aktuell)
 - **Token:** `ghp_************************************` — **gültig bis 20. Mai 2026**
   > Token ist lokal gespeichert (nicht im Repo). Bei Bedarf erneut eingeben.
-- **Dozentin:** `annahoff-syntax` als Collaborator mit Lesezugriff hinzugefügt
+- **Dozentin:** `annahoff-syntax` als Collaborator mit Lesezugriff
 
 **Wichtig:** Der Token liegt **NICHT** in der `.git/config` — er wurde nach dem Push entfernt. Bei Bedarf muss er erneut eingegeben werden.
 
@@ -96,18 +160,18 @@ Tag 1 (09.05.) : Projektplanung, Setup, Ordnerstruktur, Dependencies
 Tag 2 (10.05.) : Datenbank, SQLAlchemy Models, Pydantic Schemas, CRUD
 Tag 3 (11.05.) : REST API Endpunkte, API-Tests, Frontend-Init (Vite)
 Tag 4 (12.05.) : React Komponenten, Fetch-API, CSS Styling, .env Config
-Tag 5 (13.05.) : Refactoring, README.md, PROJEKTPLAN.md, Gitattributes
+Tag 5 (13.05.) : Refactoring, README.md, Protokolle, Gitattributes, AWS Deployment
 ```
 
-**Gesamt: 19 Commits** — Alle mit professionellen, englischen Commit-Nachrichten.
+**Gesamt: 23 Commits** — Alle mit professionellen, englischen Commit-Nachrichten.
 
 ---
 
-## 🎯 Nächste mögliche Schritte (für morgen / zukünftige Sitzungen)
+## 🎯 NÄCHSTE MÖGLICHE SCHRITTE
 
 ### Erweiterungen (Features)
 - [ ] Aufgaben nach Erledigt / Offen filtern
-- [ ] Aufgaben bearbeiten (nicht nur erledigt markieren, sondern Titel/Beschreibung ändern)
+- [ ] Aufgaben bearbeiten (Titel/Beschreibung ändern)
 - [ ] Prioritäten für Aufgaben (Hoch, Mittel, Niedrig)
 - [ ] Drag & Drop zur Sortierung
 - [ ] Dark Mode Toggle
@@ -115,33 +179,35 @@ Tag 5 (13.05.) : Refactoring, README.md, PROJEKTPLAN.md, Gitattributes
 - [ ] Unit-Tests für Backend (pytest)
 - [ ] Dockerfile für Containerisierung
 
-### Verbesserungen (Refactoring)
-- [ ] Custom Hook für Fetch-API (`useTasks`)
-- [ ] Axios statt Fetch API verwenden
-- [ ] Error Boundary in React einbauen
-- [ ] Loading-Spinner als eigene Komponente
-- [ ] Backend-Logging konfigurieren
+### AWS Verbesserungen
+- [ ] Elastic IP erstellen (feste öffentliche IP)
+- [ ] Domain registrieren + Let's Encrypt (echtes SSL)
+- [ ] S3 Backup für Datenbank einrichten
+- [ ] CloudWatch Monitoring aktivieren
+- [ ] Auto-Scaling Group konfigurieren
 
 ### IHK-relevante Dokumentation
 - [ ] Lastenheft / Pflichtenheft als PDF
 - [ ] ER-Diagramm der Datenbank
 - [ ] Architektur-Diagramm (3-Schichten)
+- [ ] Netzwerk-Diagramm (AWS-Infrastruktur)
 - [ ] Testprotokolle / Screenshots
 - [ ] Benutzerhandbuch
+- [ ] Tagesprotokolle für Tag 1, 3, 4 erstellen
 
 ---
 
-## ⚠️ Bekannte Hinweise / Grenzen
+## ⚠️ BEKANNTE HINWEISE / GRENZEN
 
-1. **SQLite** speichert die Datenbank `tasks.db` im Projektroot (neben `backend/`)
-2. **CORS** ist auf `http://localhost:5173` eingestellt — bei anderem Port anpassen
-3. **Frontend .env** enthält `VITE_API_URL=http://localhost:8000` (wird nicht in Git gespeichert)
-4. **Keine Tests** bisher — könnte als nächster Schritt kommen
-5. **Kein Build-Process** fürs Deployment — `npm run build` noch nicht getestet
+1. **Python 3.14 auf Mac** — FastAPI läuft lokal nicht (pydantic-core Inkompatibilität). Auf dem AWS-Server läuft Python 3.10 → alles funktioniert.
+2. **SQLite** speichert die Datenbank `tasks.db` im Projektroot.
+3. **CORS** ist auf `http://localhost:5173` eingestellt (lokal). Auf AWS läuft alles über Nginx.
+4. **SSL-Zertifikat** ist selbst-signiert → Browser zeigt Warnung an (für Demo normal).
+5. **EC2-Instanz ist gestoppt** — muss bei Bedarf neu gestartet werden (IP ändert sich!).
 
 ---
 
-## 🛠️ Schnell-Befehle für morgen
+## 🛠️ SCHNELL-BEFEHLE
 
 ```bash
 # Projekt öffnen
@@ -156,13 +222,29 @@ git log --oneline --graph
 # Änderungen pushen (Token nötig)
 git push origin main
 
-# Backend starten
-cd backend && uvicorn main:app --reload
+# Backend starten (lokal)
+cd backend && source venv/bin/activate && uvicorn main:app --reload
 
-# Frontend starten
+# Frontend starten (lokal)
 cd frontend && npm run dev
+
+# AWS-Instanz starten
+aws ec2 start-instances --instance-ids i-08a82ffebd6802307 --profile Danial --region eu-central-1
+
+# AWS-Instanz stoppen
+aws ec2 stop-instances --instance-ids i-08a82ffebd6802307 --profile Danial --region eu-central-1
 ```
 
 ---
 
-**Stand:** Projekt ist funktionsfähig und dokumentiert. Bereit für Erweiterungen oder Abgabe-Vorbereitung. 🎓
+## 📞 SUPPORT
+
+Bei Fragen oder Problemen:
+1. Diese Datei lesen
+2. `README.md` im Projektroot lesen
+3. `dokumentation/AWS-DEPLOYMENT.md` für AWS-Fragen
+4. GitHub-Issues erstellen oder Dozentin fragen
+
+---
+
+**Stand:** Projekt ist vollständig entwickelt, dokumentiert und auf AWS deployed. Instanz ist aktuell gestoppt. Bereit für Abgabe oder Erweiterung. 🎓
