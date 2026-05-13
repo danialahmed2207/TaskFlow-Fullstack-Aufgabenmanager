@@ -1,0 +1,21 @@
+# Git Attributes für konsistente Zeilenenden
+* text=auto eol=lf
+
+# Markiere bestimmte Dateien als Text
+*.js text
+*.jsx text
+*.css text
+*.html text
+*.py text
+*.md text
+*.json text
+*.yml text
+*.yaml text
+
+# Markiere Binärdateien
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
