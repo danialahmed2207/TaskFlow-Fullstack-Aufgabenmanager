@@ -1,5 +1,3 @@
-import React from 'react'
-
 /**
  * Einzelne Task-Komponente
  * Trennt die Darstellung einer Aufgabe vom Haupt-App-Container.
